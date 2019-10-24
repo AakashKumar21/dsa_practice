@@ -1,0 +1,8 @@
+dsa_python/.idea
+dsa_python/.vscode
+dsa_python/__pycache__
+dsa_python/venv
+ds_cpp/.idea
+ds_cpp/.vscode
+ds_cpp/cmake-build-debug
+ds_cpp/CMakeLists.txt
