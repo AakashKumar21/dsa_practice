@@ -15,13 +15,11 @@ class Queue:
         self._tail_node.set_next(node)
         self._tail_node = node
 
-    def delete_from_front(self):
+    def delete_from_front(self): # Constant Time
         return self._list.delete_head()
 
-    def delete_from_rear(self, data):
-        tmp = self._tail_node.get_data()
-        self._tail_node = self._tail_node.get_next()
-        return tmp
+    def delete_from_rear(self):
+        pass
 
     def get_rear(self):
         return self._tail_node.get_data()

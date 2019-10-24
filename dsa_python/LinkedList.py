@@ -35,3 +35,24 @@ class LinkedList:
         
     def get_head_node(self):
         return self._head
+
+    def remove_node(self,data):
+        #Like Pointer and pre ptr
+        pre_tmp_node = self.get_head_node()
+        pre_tmp_data = self.get_head_node().get_data()
+        tmp_node = self.get_head_node().get_next()
+        tmp_data = tmp_node.get_data()
+        
+        while(True):
+            if(pre_tmp_node == None):
+                break
+            if(tmp_data == data):
+                pre_tmp_node.set_next(tmp_node.get_next())
+            else:
+                # Increment Node
+                pre_tmp_node = pre_tmp_node.get_next()
+                tmp_node = tmp_node.get_next()
+                # Set Data
+                tmp_data = tmp_node.get_data()
+                pre_tmp_data = pre_tmp_data.get_data()
+            

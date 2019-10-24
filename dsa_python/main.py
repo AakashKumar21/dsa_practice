@@ -8,10 +8,12 @@ from Queue import Queue
 # else:
 #     print("Invalid")
 
-q = Queue("aakash")
-q.insert_at_rear("GG")
-q.insert_at_rear("ABC")
-print (q.delete_from_front()) //TODO
+q = Queue("1")
+q.insert_at_rear("2")
+q.insert_at_rear("3")
+q.insert_at_rear("4")
+
+print (q.delete_from_front()) #TODO FIX
 
 print(q.get_front())
 print(q.get_rear())
