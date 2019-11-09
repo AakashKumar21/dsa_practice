@@ -9,6 +9,7 @@ class queue {
 private:
     linked_list<type> *_list;
     Node<type> *_tail;
+    int _count;
 
 public:
     void enq_front(type data);
