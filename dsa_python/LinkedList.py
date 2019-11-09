@@ -3,7 +3,6 @@ from Node import Node
 class LinkedList:
     def __init__(self, data):
         self._head = Node(data)  # Head Node
-        self._n = self._head  # Current Node
         self._count = 1
 
     def insert_as_head(self, new_node):
@@ -12,7 +11,7 @@ class LinkedList:
         self._count += 1
 
     def insert_after(self,node, new_node):
-        new_node.set_next(node)
+        new_node.set_next(node.get_next())
         node.set_next(new_node)
 
     def delete_head(self):
@@ -44,7 +43,7 @@ class LinkedList:
         tmp_data = tmp_node.get_data()
         
         while(True):
-            if(pre_tmp_node == None):
+            if(pre_tmp_node == None): # TODO
                 break
             if(tmp_data == data):
                 pre_tmp_node.set_next(tmp_node.get_next())
@@ -55,4 +54,6 @@ class LinkedList:
                 # Set Data
                 tmp_data = tmp_node.get_data()
                 pre_tmp_data = pre_tmp_data.get_data()
-            
+
+    def get_count():
+        return self._count

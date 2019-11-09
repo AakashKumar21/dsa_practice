@@ -1,6 +1,6 @@
 from P_match import p_match as pm
 from Queue import Queue
-
+from LinkedList import LinkedList
 
 # exp = "[5-(4*6)+{3(6-4)[3]}]"
 # if pm(exp):
@@ -8,12 +8,19 @@ from Queue import Queue
 # else:
 #     print("Invalid")
 
-q = Queue("1")
-q.insert_at_rear("2")
-q.insert_at_rear("3")
-q.insert_at_rear("4")
+# q = Queue("1")
+# q.insert_at_rear("2")
+# q.insert_at_rear("3")
+# q.insert_at_rear("4")
+# q.insert_at_rear("2")
+# q.insert_at_rear("3")
+# q.insert_at_rear("4")
 
-print (q.delete_from_front()) #TODO FIX
 
-print(q.get_front())
-print(q.get_rear())
+# print(q.get_front())
+# print(q.get_rear())
+
+# q.traverse()
+
+l = LinkedList(45)
+l.push
