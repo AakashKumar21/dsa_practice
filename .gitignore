@@ -6,3 +6,6 @@ ds_cpp/.idea
 ds_cpp/.vscode
 ds_cpp/cmake-build-debug
 ds_cpp/CMakeLists.txt
+ds_cpp/main.s
+ds_cpp/a.exe
+.vscode/c_cpp_properties.json

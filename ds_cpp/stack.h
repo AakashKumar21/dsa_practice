@@ -21,7 +21,7 @@ public:
     type get_data() { return _list->get_head_data(); }
     auto get_head_node();
     bool is_empty();
-    int count() { return _top; };
+    int count() { return _list->get_count(); };
 };
 
 template<typename type>
@@ -42,13 +42,14 @@ void stack<type>::push(type data) {
     // call set_data of the head_node in the linked list
     if(_top == -1)
     {
-        _list->get_head()->set_data(data);
-        _top += 1;
+        _list->insert_as_head(data);
+//        _list->get_head()->set_data(data);
+        _top = 1;
         return;
     }
-    _top += 1;
+    _top ++;
     _list->insert_as_head(new Node<type>(data));
-    //std::cout<< "Count Inside:" << _top<< std::endl;
+//    std::cout<< "Count Inside:" << _top<< std::endl;
 }
 
 template<typename type>
@@ -65,8 +66,7 @@ auto stack<type>::get_head_node() {
 
 template<typename type>
 bool stack<type>::is_empty() {
-    if(_top == -1) return 1;
-    else return 0;
+    return _list->is_empty();
 }
 
 #endif //TEST_CPP_STACK_H

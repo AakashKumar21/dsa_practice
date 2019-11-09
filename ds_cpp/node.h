@@ -13,7 +13,7 @@ private:
         Node *_next;
 
 public:
-    Node(Type data = 0, Node *next = nullptr);
+    Node(Type data, Node *next = nullptr);
     // Data Setter n Getter
     Type get_data() const;
     void set_data(Type data);
