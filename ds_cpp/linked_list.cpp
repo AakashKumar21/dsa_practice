@@ -11,7 +11,8 @@ linked_list<type>::linked_list(type data) {
 
 template<typename type>
 void linked_list<type>::push(type data) {
-    if(_head == nullptr){
+//    if(_head == nullptr){
+    if(_count == -1){
         _head = new Node<type>(data); // As list is empty, there is no head
         _tail = _head;
         _count = 1; // As in empty linked list, _count = -1
@@ -86,5 +87,20 @@ void linked_list<type>::insert_as_head(type data) {
     _head = node;
     if (_head == nullptr) _count = 1;
     else _count++;
+}
+
+template<typename type>
+void linked_list<type>::push(Node<type> *node) {
+//    if(_head == nullptr){
+    if(_count == -1){
+        _head = node; // As list is empty, there is no head
+        _tail = _head;
+        _count = 1; // As in empty linked list, _count = -1
+    }
+    else {
+        _count++;
+        _tail->set_next(node);
+        _tail = _tail->get_next();
+    }
 }
 

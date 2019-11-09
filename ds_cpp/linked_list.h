@@ -20,6 +20,7 @@ private:
 public:
     linked_list(type data);
     void push(type data);
+    void push(Node<type> *node);
     void insert_as_head( Node<type> * node);
     void insert_as_head(type data);
     void insert_after( Node<type>* old_node, Node<type>* new_node);
