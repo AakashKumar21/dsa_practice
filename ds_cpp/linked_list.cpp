@@ -39,7 +39,7 @@ type linked_list<type>::delete_head() {
     if(_head->get_next() == nullptr )
 //    if(_head == nullptr )
     {
-        if(_count == -1) throw "list is empty";
+        if(_count == -1) throw std::runtime_error("List is empty");
         _count = -1;
         auto tmp = _head->get_data();
         delete _head;
