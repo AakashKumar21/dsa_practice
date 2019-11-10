@@ -25,7 +25,8 @@ void queue<type>::enq_rear(type data){
 
 template<typename type>
 type queue<type>::deq_front() {
-    _count--;
+    _count == 1 ? (_count = -1) : (_count--);
+    if(_count == -1) throw std::runtime_error("Queue is empty");
     return _list->delete_head();
 }
 
@@ -47,12 +48,14 @@ int queue<type>::get_count() {
 
 template<typename type>
 type queue<type>::deq_rear() {
+    if(_count == -1 ) throw std::runtime_error("Queue is empty");
     auto preptr = _list->get_head();
     if(_count == 1)
     {
         type tmp_data = preptr->get_data();
         delete preptr;
         _tail = nullptr;
+        _count = -1;
         return tmp_data;
     }
     while(true)
