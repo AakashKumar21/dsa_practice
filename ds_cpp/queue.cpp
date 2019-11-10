@@ -3,6 +3,8 @@
 //
 
 #include "queue.h"
+#include <iostream>
+using namespace std;
 
 template<typename type>
 queue<type>::queue(type data) {
@@ -23,8 +25,8 @@ void queue<type>::enq_rear(type data){
 
 template<typename type>
 type queue<type>::deq_front() {
-    return _list->delete_head();
     _count--;
+    return _list->delete_head();
 }
 
 template<typename type>
@@ -46,12 +48,20 @@ int queue<type>::get_count() {
 template<typename type>
 type queue<type>::deq_rear() {
     auto preptr = _list->get_head();
+    if(_count == 1)
+    {
+        type tmp_data = preptr->get_data();
+        delete preptr;
+        _tail = nullptr;
+        return tmp_data;
+    }
     while(true)
     {
         if (preptr->get_next() == _tail) {
             type tmp_data = preptr->get_next()->get_data();
             delete preptr->get_next();
             _tail = preptr;
+            _count--;
             return tmp_data;
         }
         preptr = preptr->get_next();
