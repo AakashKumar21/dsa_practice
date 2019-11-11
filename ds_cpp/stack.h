@@ -54,7 +54,8 @@ void stack<type>::push(type data) {
 
 template<typename type>
 type stack<type>::pop() {
-    --_top;
+    if (_top == 1) _top = -1;
+    else _top--;
 //    if(_list->is_empty()) return
     return _list->delete_head();
 }
