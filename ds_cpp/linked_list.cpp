@@ -103,4 +103,3 @@ void linked_list<type>::push(Node<type> *node) {
         _tail = _tail->get_next();
     }
 }
-
