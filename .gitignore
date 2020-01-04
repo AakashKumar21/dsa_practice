@@ -9,3 +9,8 @@ ds_cpp/CMakeLists.txt
 ds_cpp/main.s
 ds_cpp/a.exe
 .vscode/c_cpp_properties.json
+ds_cpp/test.asm
+ds_cpp/test.c
+ds_cpp/test.exe
+ds_cpp/test2.c
+ds_cpp/test_cpp.exe
