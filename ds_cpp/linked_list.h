@@ -28,6 +28,7 @@ public:
     type delete_head();
     void insert_as_tail(type data);
     auto get_head() const { return _head; }
+    auto get_tail() const { return _tail; }
     // Returns 1 if empty
     auto is_empty() { return _count == -1; }
     type get_head_data() const;
