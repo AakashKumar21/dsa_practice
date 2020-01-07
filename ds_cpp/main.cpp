@@ -26,14 +26,15 @@ int main()
 //        // cout<< "Count:" << exp.count() <<endl;
 //    }
 //    if(p_match(exp)) cout << "Valid Eqn";
-auto x = queue<char>('A');
-x.enq_front('B');
-x.enq_front('C');
-x.enq_front('D');
-x.enq_rear('X');
-x.enq_rear('Y');
-cout<< x.get_front() << ' ' << x.get_rear() << endl;
-x.deq_front();x.deq_front();
-x.deq_rear();
-cout<< x.get_front() << ' ' << x.get_rear();
+    auto x = queue<char>('A');
+    x.enq_front('B');
+    x.enq_front('C');
+//x.enq_front('D');
+    x.enq_rear('Z');
+    x.enq_rear('Y');
+    cout << x.get_front() << ' ' << x.get_rear() << endl;
+    x.deq_front();
+    x.deq_front();
+    x.deq_rear();
+    cout << x.get_front() << ' ' << x.get_rear();
 }

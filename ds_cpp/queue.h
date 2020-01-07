@@ -54,9 +54,10 @@ template<typename type>
 type queue<type>::get_front() {
     return _list->get_head_data();
 }
+
 template<typename type>
-type queue<type>::get_rear() {
-    return _list->get_tail()->get_data();
+type queue<type>::get_rear() { // TODO , use _tail from Linked lists and remove it from here
+    return _tail->get_data();
 }
 
 template<typename type>
@@ -87,10 +88,11 @@ type queue<type>::deq_rear() {
         if (preptr->get_next() == _tail) {
             type tmp_data = preptr->get_next()->get_data();
             delete preptr->get_next();
+            preptr->set_next(nullptr);
             _tail = preptr;
             _count--;
             return tmp_data;
-        }
+        } else
         preptr = preptr->get_next();
     }
 }
