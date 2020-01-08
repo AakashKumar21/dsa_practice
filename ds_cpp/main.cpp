@@ -8,7 +8,6 @@
 #include <vector>
 //#include "graph.cpp"
 
-#define println(x) std::cout << x << std::endl
 using namespace std;
 
 int main()
@@ -29,7 +28,6 @@ int main()
     auto x = queue<char>('A');
     x.enq_front('B');
     x.enq_front('C');
-//x.enq_front('D');
     x.enq_rear('Z');
     x.enq_rear('Y');
     cout << x.get_front() << ' ' << x.get_rear() << endl;
