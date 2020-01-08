@@ -96,10 +96,34 @@ void linked_list<type>::push(Node<type> *node) {
         _head = node; // As list is empty, there is no head
         _tail = _head;
         _count = 1; // As in empty linked list, _count = -1
-    }
-    else {
+    } else {
         _count++;
         _tail->set_next(node);
         _tail = _tail->get_next();
     }
+}
+
+template<typename type>
+type linked_list<type>::pop() {
+    if (_count == -1) throw std::runtime_error("Queue is empty");
+    auto preptr = _head;
+    if (_count == 1) {
+        type tmp_data = preptr->get_data();
+        delete preptr;
+        _tail = nullptr;
+        _count = -1;
+        return tmp_data;
+    }
+    while (true) {
+        if (preptr->get_next() == _tail) {
+            type tmp_data = preptr->get_next()->get_data();
+            delete preptr->get_next();
+            preptr->set_next(nullptr);
+            _tail = preptr;
+            _count--;
+            return tmp_data;
+        } else
+            preptr = preptr->get_next();
+    }
+    return 0;
 }
