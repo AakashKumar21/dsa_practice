@@ -3,7 +3,7 @@
 
 #include "linked_list.h"
 
-template <typename type>
+template<typename type>
 
 class queue {
 private:
@@ -14,14 +14,21 @@ private:
 public:
     // EnQ
     void enq_front(type data);
+
     void enq_rear(type data);
+
     // DeQ
     type deq_front();
+
     type deq_rear();
+
     //Getters
     type get_front();
+
     type get_rear();
+
     int get_count();
+
     queue(type data);
 };
 
@@ -33,7 +40,7 @@ queue<type>::queue(type data) {
 }
 
 template<typename type>
-void queue<type>::enq_rear(type data){
+void queue<type>::enq_rear(type data) {
     auto node = new Node<type>(data);
     _list->push(node);
 //    _tail = node;
@@ -45,7 +52,7 @@ void queue<type>::enq_rear(type data){
 template<typename type>
 type queue<type>::deq_front() {
     _count == 1 ? (_count = -1) : (_count--);
-    if(_count == -1) throw std::runtime_error("Queue is empty");
+    if (_count == -1) throw std::runtime_error("Queue is empty");
     return _list->delete_head();
 }
 
