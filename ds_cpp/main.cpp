@@ -11,8 +11,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
 //    char x;
 //    cout << "Enter equation, finish it by \'!\'";
 //    cin >> x;
@@ -43,5 +42,6 @@ int main()
     arr[3] = 76;
     arr[4] = 87;
     arr[5] = 687;
-    cout << arr.search_binary(76);
+    arr.reverse();
+    for (int x:arr) cout << x << endl;
 }
