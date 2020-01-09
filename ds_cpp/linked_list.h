@@ -2,6 +2,7 @@
 // Created by aakas on 10/10/2019.
 //
 #include "node.h"
+
 #ifndef TEST_CPP_LINKED_LIST_H
 #define TEST_CPP_LINKED_LIST_H
 
@@ -9,9 +10,8 @@
  * 1. Always init with 1 Node
 */
 
-template <typename type>
-class linked_list
-{
+template<typename type>
+class linked_list {
 private:
     Node<type> *_head = nullptr;
     Node<type> *_tail = nullptr;
