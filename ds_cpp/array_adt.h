@@ -6,6 +6,7 @@
 #define DSA_CPP_ARRAY_ADT_H
 
 #include <bits/functexcept.h>
+#include <iostream>
 
 template<typename type>
 class array {
@@ -15,6 +16,8 @@ private:
 
 public:
     array(unsigned int size);
+
+    array(type *array, unsigned int size);
 
     type *get_head(); // return pointer to array i.e to 1st element of array
     type &operator[](unsigned int i);
@@ -31,7 +34,7 @@ public:
 
     int get_size() { return m_size; };
 
-    void sort(bool ascending); //ascending if 1, else descending
+    void sort_bubble(bool ascending); //ascending if 1, else descending
 
     type *begin() { return m_array; };
 
@@ -103,9 +106,25 @@ type array<type>::get_min() {
 }
 
 template<typename type>
-void array<type>::sort(bool ascending) { // TODO
-    if (ascending) {
+void array<type>::sort_bubble(bool ascending) { // TODO
+    bool swap_flag;
 
+    //Outer loop for pass
+    for (int pass = 0; pass < m_size; pass++) {
+        swap_flag = false;
+        for (int j = 0; j < m_size - pass - 1; ++j) {
+
+            if (m_array[j] > m_array[j + 1]) {
+                // SWAP
+                type c = m_array[j];
+                m_array[j] = m_array[j + 1];
+                m_array[j + 1] = c;
+                swap_flag = true;
+            }
+            
+            //Array is sorted
+        }
+        if (!swap_flag) break;
     }
 }
 
@@ -126,6 +145,12 @@ bool array<type>::isSorted() { // TODO, not working for floats
         if (m_array[i] > m_array[i + 1]) return false;
     }
     return true;
+}
+
+template<typename type>
+array<type>::array(type *array, unsigned int size) {
+    m_array = array;
+    m_size = size;
 }
 
 #endif //DSA_CPP_ARRAY_ADT_H
