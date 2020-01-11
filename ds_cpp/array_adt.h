@@ -5,6 +5,8 @@
 #ifndef DSA_CPP_ARRAY_ADT_H
 #define DSA_CPP_ARRAY_ADT_H
 
+#include <bits/functexcept.h>
+
 template<typename type>
 class array {
 private:
@@ -17,9 +19,9 @@ public:
     type *get_head(); // return pointer to array i.e to 1st element of array
     type &operator[](unsigned int i);
 
-    int search_binary(int key);
+    int search_binary(type key); // TODO , not working for floats
 
-    const // Returns index
+    // Returns index
 
     type get_max();
 
@@ -34,11 +36,13 @@ public:
     type *begin() { return m_array; };
 
     type *end() { return &m_array[m_size - 1]; };
+
+    bool isSorted();
 };
 
 template<typename type>
 array<type>::array(unsigned int size) {
-    m_array = new int[size];
+    m_array = new type[size];
     m_size = size;
 }
 
@@ -49,11 +53,12 @@ type *array<type>::get_head() {
 
 template<typename type>
 type &array<type>::operator[](unsigned int i) {
+    if (i >= m_size) std::__throw_out_of_range("Out of Range");
     return m_array[i];
 }
 
 template<typename type>
-int array<type>::search_binary(int key) {
+int array<type>::search_binary(type key) {
 //RECURSIVE
 //    int mid;
 //    if(l<=h)
@@ -81,7 +86,7 @@ int array<type>::search_binary(int key) {
 }
 
 template<typename type>
-const // Returns index
+// Returns index
 type array<type>::get_max() {
     type max = m_array[0];
     for (int i = 1; i < m_size; i++)
@@ -98,7 +103,7 @@ type array<type>::get_min() {
 }
 
 template<typename type>
-void array<type>::sort(bool ascending) {
+void array<type>::sort(bool ascending) { // TODO
     if (ascending) {
 
     }
@@ -112,6 +117,15 @@ type array<type>::reverse() {
     }
     delete[] m_array;
     m_array = new_arr;
+
+}
+
+template<typename type>
+bool array<type>::isSorted() { // TODO, not working for floats
+    for (int i = 0; i < m_size - 1; ++i) {
+        if (m_array[i] > m_array[i + 1]) return false;
+    }
+    return true;
 }
 
 #endif //DSA_CPP_ARRAY_ADT_H
