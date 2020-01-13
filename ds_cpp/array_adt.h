@@ -28,7 +28,7 @@ public:
 
     type get_max();
 
-    type get_min();
+    int get_min(int i = 0); // returns index
 
     type reverse();
 
@@ -38,6 +38,8 @@ public:
 
     void sort_insertion();
 
+    void sort_selection();
+
     type *begin() { return m_array; };
 
     type *end() { return &m_array[m_size - 1]; };
@@ -45,15 +47,14 @@ public:
     bool isSorted();
 
 private:
-    void _swap(type& t_a, type& t_b);
-    // Shifts element to right till index i
-    void _shift(int i);
+    void _swap(type &t_a, type &t_b);
+
 };
 
 template<typename type>
 array<type>::array(unsigned int size) {
-    m_array = new type[size];
-    m_size = size;
+    m_array = new type[size + 1];
+    m_size = size + 1; // for quickSort op
 }
 
 template<typename type>
@@ -105,11 +106,17 @@ type array<type>::get_max() {
 }
 
 template<typename type>
-type array<type>::get_min() {
-    type min = m_array[0];
-    for (int i = 1; i < m_size; i++)
-        if (m_array[i] < min) min = m_array[i];
-    return min;
+int array<type>::get_min(int i) {
+    type min = m_array[i];
+    int min_index = i;
+    for (; i < m_size-1; i++) {
+        if (m_array[i] < min)
+        {
+            min = m_array[i];
+            min_index = i;
+        }
+    }
+    return min_index;
 }
 
 template<typename type>
@@ -151,8 +158,11 @@ bool array<type>::isSorted() { // TODO, not working for floats
 
 template<typename type>
 array<type>::array(type *t_array, unsigned int t_size) {
-    m_array = t_array;
-    m_size = t_size;
+    unsigned int size = t_size + 1;
+    m_array = new type[size]; // for some sort op
+    // Copy it to new memory address
+    for (int i = 0; i < t_size; i++) m_array[i] = t_array[i];
+    m_size = size;
 }
 
 template<typename type>
@@ -160,13 +170,11 @@ void array<type>::sort_insertion() {
 
     // 1st element is already sorted
 
-    for(int i=1 ; i<m_size ; i++)
-    {
+    for (int i = 1; i < m_size; i++) {
         type temp = m_array[i];
         int index = i;
-        while ( index > 0 && m_array[index -1] > temp)
-        {
-            m_array[index] = m_array[index -1];
+        while (index > 0 && m_array[index - 1] > temp) {
+            m_array[index] = m_array[index - 1];
             --index;
         }
         m_array[index] = temp;
@@ -182,12 +190,16 @@ void array<type>::_swap(type &t_a, type &t_b) {
 }
 
 template<typename type>
-void array<type>::_shift(int i) {
-//    type element = m_array[m_size]; // elem
-//    for(int k=0 ; k < i; k++)
-//    {
-//        m_array[i]
-//    }
+void array<type>::sort_selection() {
+    for (int i = 0; i < m_size - 1; i++) {
+        for(int j=0; j<m_size-1; j++)
+        {
+            std:: cout << m_array[j] << " ";
+        }
+        std:: cout << "Min Index: " << get_min(i) << "\n";
+        std:: cout << "Min Value: " << m_array[get_min(i)] << "\n";
+        _swap(m_array[i], m_array[get_min(i)]);
+    }
 }
 
 #endif //DSA_CPP_ARRAY_ADT_H

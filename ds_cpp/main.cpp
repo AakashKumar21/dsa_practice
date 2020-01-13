@@ -10,10 +10,9 @@
 using namespace std;
 
 int main() {
-    int x[10] = {34,34,26,18,1,1,54,67,657,2};
+    int x[10] = {34,32,26,600,2};
     vector <int> z;
-    auto arr = array<int>(x,10);
-    arr.sort_insertion();
+    auto arr = array<int>(x,5);
+    arr.sort_selection();
     for(int y: arr) cout << y << " ";
-
 }
