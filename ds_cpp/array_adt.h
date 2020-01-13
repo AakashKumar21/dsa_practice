@@ -17,7 +17,7 @@ private:
 public:
     array(unsigned int size);
 
-    array(type *array, unsigned int size);
+    array(type *t_array, unsigned int t_size);
 
     type *get_head(); // return pointer to array i.e to 1st element of array
     type &operator[](unsigned int i);
@@ -34,13 +34,20 @@ public:
 
     int get_size() { return m_size; };
 
-    void sort_bubble(bool ascending); //ascending if 1, else descending
+    void Sort_bubble(bool ascending); //ascending if 1, else descending TODO
+
+    void sort_insertion();
 
     type *begin() { return m_array; };
 
     type *end() { return &m_array[m_size - 1]; };
 
     bool isSorted();
+
+private:
+    void _swap(type& t_a, type& t_b);
+    // Shifts element to right till index i
+    void _shift(int i);
 };
 
 template<typename type>
@@ -106,22 +113,17 @@ type array<type>::get_min() {
 }
 
 template<typename type>
-void array<type>::sort_bubble(bool ascending) { // TODO
+void array<type>::Sort_bubble(bool ascending) { // TODO
     bool swap_flag;
 
     //Outer loop for pass
     for (int pass = 0; pass < m_size; pass++) {
         swap_flag = false;
         for (int j = 0; j < m_size - pass - 1; ++j) {
-
             if (m_array[j] > m_array[j + 1]) {
-                // SWAP
-                type c = m_array[j];
-                m_array[j] = m_array[j + 1];
-                m_array[j + 1] = c;
+                _swap(m_array[j], m_array[j + 1]);
                 swap_flag = true;
             }
-            
             //Array is sorted
         }
         if (!swap_flag) break;
@@ -148,9 +150,44 @@ bool array<type>::isSorted() { // TODO, not working for floats
 }
 
 template<typename type>
-array<type>::array(type *array, unsigned int size) {
-    m_array = array;
-    m_size = size;
+array<type>::array(type *t_array, unsigned int t_size) {
+    m_array = t_array;
+    m_size = t_size;
+}
+
+template<typename type>
+void array<type>::sort_insertion() {
+
+    // 1st element is already sorted
+
+    for(int i=1 ; i<m_size ; i++)
+    {
+        type temp = m_array[i];
+        int index = i;
+        while ( index > 0 && m_array[index -1] > temp)
+        {
+            m_array[index] = m_array[index -1];
+            --index;
+        }
+        m_array[index] = temp;
+    }
+}
+
+template<typename type>
+void array<type>::_swap(type &t_a, type &t_b) {
+    type temp;
+    temp = t_a;
+    t_a = t_b;
+    t_b = temp;
+}
+
+template<typename type>
+void array<type>::_shift(int i) {
+//    type element = m_array[m_size]; // elem
+//    for(int k=0 ; k < i; k++)
+//    {
+//        m_array[i]
+//    }
 }
 
 #endif //DSA_CPP_ARRAY_ADT_H
