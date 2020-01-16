@@ -34,7 +34,9 @@ public:
 
     int get_size() { return m_size; };
 
-    void Sort_bubble(bool ascending); //ascending if 1, else descending TODO
+    void sort_bubble();
+
+    void sort_merge();
 
     void sort_insertion();
 
@@ -42,19 +44,21 @@ public:
 
     type *begin() { return m_array; };
 
-    type *end() { return &m_array[m_size - 1]; };
+    type *end() { return &m_array[m_size]; };
 
     bool isSorted();
 
 private:
     void _swap(type &t_a, type &t_b);
 
+    void _merge(int low, int mid, int high);
+
 };
 
 template<typename type>
 array<type>::array(unsigned int size) {
-    m_array = new type[size + 1];
-    m_size = size + 1; // for quickSort op
+    m_array = new type[size];
+    m_size = size; // for quickSort op
 }
 
 template<typename type>
@@ -109,9 +113,8 @@ template<typename type>
 int array<type>::get_min(int i) {
     type min = m_array[i];
     int min_index = i;
-    for (; i < m_size-1; i++) {
-        if (m_array[i] < min)
-        {
+    for (; i < m_size - 1; i++) {
+        if (m_array[i] < min) {
             min = m_array[i];
             min_index = i;
         }
@@ -120,7 +123,7 @@ int array<type>::get_min(int i) {
 }
 
 template<typename type>
-void array<type>::Sort_bubble(bool ascending) { // TODO
+void array<type>::sort_bubble() { // TODO
     bool swap_flag;
 
     //Outer loop for pass
@@ -158,11 +161,8 @@ bool array<type>::isSorted() { // TODO, not working for floats
 
 template<typename type>
 array<type>::array(type *t_array, unsigned int t_size) {
-    unsigned int size = t_size + 1;
-    m_array = new type[size]; // for some sort op
-    // Copy it to new memory address
-    for (int i = 0; i < t_size; i++) m_array[i] = t_array[i];
-    m_size = size;
+    m_array = t_array;
+    m_size = t_size;
 }
 
 template<typename type>
@@ -192,14 +192,55 @@ void array<type>::_swap(type &t_a, type &t_b) {
 template<typename type>
 void array<type>::sort_selection() {
     for (int i = 0; i < m_size - 1; i++) {
-        for(int j=0; j<m_size-1; j++)
-        {
-            std:: cout << m_array[j] << " ";
+        for (int j = 0; j < m_size - 1; j++) {
+            std::cout << m_array[j] << " ";
         }
-        std:: cout << "Min Index: " << get_min(i) << "\n";
-        std:: cout << "Min Value: " << m_array[get_min(i)] << "\n";
+        std::cout << "Min Index: " << get_min(i) << "\n";
+        std::cout << "Min Value: " << m_array[get_min(i)] << "\n";
         _swap(m_array[i], m_array[get_min(i)]);
     }
+}
+
+template<typename type>
+void array<type>::sort_merge() {
+    int i, low, mid , high, p;
+
+    // Outer loop for passes, total passes = log2(n)
+    for (p = 2; p <= m_size - 1; p *= 2) {
+        std::cout << "Pass" << p << "\n";
+        // Size of array passed is doubled in each pass
+        for (i = 0; i + p < m_size - 1; i = i + p) {
+            low = i;
+            high = i + p - 1;
+            mid = (low + high) / 2;
+            std::cout<< low << ":" << mid << ":" << high << "\n";
+            _merge(low, mid, high);
+        }
+    }
+    std::cout<< low << ":" << mid << ":" << high << "\n";
+    if (p / 2 < m_size) _merge(0, (p / 2 ) - 1, m_size );
+}
+
+// merging of two lists in same array
+template<typename type>
+void array<type>::_merge(int low, int mid, int high) {
+    type *new_array = new type[high + 1];// temp array
+
+    int i = low, j = mid + 1, k = low;
+
+    while (i <= mid && j <= high) {
+        if (m_array[i] < m_array[j])
+            new_array[k++] = m_array[i++];
+        else
+            new_array[k++] = m_array[j++];
+    }
+    for (; i <= mid; i++)
+        new_array[k++] = m_array[i];
+    for (; j <= high; j++)
+        new_array[k++] = m_array[j];
+
+    for (int i = low; i <= high; i++)
+        m_array[i] = new_array[i];
 }
 
 #endif //DSA_CPP_ARRAY_ADT_H
