@@ -16,6 +16,11 @@ from LinkedList import LinkedList
 # q.insert_at_rear("3")
 # q.insert_at_rear("4")
 
-x = LinkedList("z")
-x.insert_as_head("ss")
-print(x.delete_head())
+
+# print(q.get_front())
+# print(q.get_rear())
+
+# q.traverse()
+
+l = LinkedList(45)
+l.push

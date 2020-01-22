@@ -4,16 +4,13 @@ class LinkedList:
     def __init__(self, data):
         self._head = Node(data)  # Head Node
         self._count = 1
-        self_tail = None
 
-    def insert_as_head(self, data):
-        new_node = Node(data)
+    def insert_as_head(self, new_node):
         new_node.set_next(self._head)
         self._head = new_node
         self._count += 1
 
-    def insert_after(self,node, data):
-        new_node = Node(data)
+    def insert_after(self,node, new_node):
         new_node.set_next(node.get_next())
         node.set_next(new_node)
 
