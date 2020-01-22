@@ -18,7 +18,7 @@ void to_postfix(const char *exp) {
             temp.push(c);
 
             //2. IF its a operand push to postfix exp
-        else if (isalpha(c))
+        else if (isalnum(c))
             postfix_exp.push_back(c);
 
             //3. If its operator
